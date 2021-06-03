@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 from . import PROJECT_ROOT
-from .utils import find_contours
+from .utils import *
 np.random.seed(42)
 
 def prep_labelled_graph(in_path, out_dir, num_lines=None, delimiter=","):
