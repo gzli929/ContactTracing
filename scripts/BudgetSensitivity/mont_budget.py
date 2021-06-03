@@ -10,12 +10,7 @@ from collections import namedtuple
 json_dir = PROJECT_ROOT / "data" / "SIR_Cache"
 
 G = load_graph_montgomery_labels()
-#G2 = read_extra_edges(G, 0.15)
-#G3 = load_graph_cville_labels()
-#G4 = read_extra_edges(G3, 0.15)
 
-#be5 for cville w/ added edges, ce6 for montgomery w/ added edges
-#b5 for cville, c7 for montgomery
 
 config = {
     "G" : [G],
@@ -26,7 +21,7 @@ config = {
     "compliance_rate": [-1],
     "compliance_known": [True],
     "snitch_rate": [1],
-    "from_cache": ["c7.json"],
+    "from_cache": ["mont.json"],
     "agent": [Random, DegGreedy_fair, DepRound_fair, SegDegree]
 }
 

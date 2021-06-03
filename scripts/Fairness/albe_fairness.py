@@ -10,29 +10,19 @@ from collections import namedtuple
 json_dir = PROJECT_ROOT / "data" / "SIR_Cache"
 
 G = load_graph_cville_labels()
-#G4 = read_extra_edges(G3, 0.15)
-
-#be5 for cville w/ added edges, ce6 for montgomery w/ added edges
-#b5 for cville, c7 for montgomery
-
-#defaults: snitch = 0.8, discovery = 0.8, compliance = 0.8
-#montgomery budget: 750
-#cville budget: 1350
-
 
 config = {
     "G" : [G],
-    "budget": [i for i in range(720, 2270, 20)],
-    "policy": ["none"],
+    "budget": [1350],
+    "policy": ["none", "equal", "old", "adult"],
     "transmission_rate": [0.05],
     "transmission_known": [True],
-    "compliance_rate": [-1],
+    "compliance_rate": [0.8],
     "compliance_known": [True],
     "snitch_rate": [1],
-    "from_cache": ["b5.json"],
-    "agent": [Random, DegGreedy_fair, DepRound_fair, SegDegree]
+    "from_cache": ["albe.json"],
+    "agent": [DegGreedy_fair, DepRound_fair]
 }
-
 
 in_schema = list(config.keys())
 out_schema = ["infection_count", "infections_step"]
@@ -47,7 +37,6 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
             infections = j["infections"]
 
     state = InfectionState(G, (S, I1, I2, R), budget, policy, transmission_rate, transmission_known, compliance_rate, compliance_known, snitch_rate)
-    
     while len(state.SIR.I1) + len(state.SIR.I2) != 0:
         to_quarantine = agent(state)
         state.step(to_quarantine)
@@ -55,7 +44,7 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
     
     return TrackerInfo(len(state.SIR.R), infections)
 
-
-run = GridExecutorParallel.init_multiple(config, in_schema, out_schema, func=time_trial_tracker, trials=10)
+run = GridExecutorParallel.init_multiple(config, in_schema, out_schema, func=time_trial_tracker, trials=50)
 run.exec(max_workers=40)
+
 #%%
