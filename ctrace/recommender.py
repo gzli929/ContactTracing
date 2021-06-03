@@ -3,10 +3,10 @@ import math
 import numpy as np
 import networkx as nx
 
-from .round import D_prime
-from .utils import pct_to_int
-from .simulation import *
-from .problem_label import *
+from ctrace.round import D_prime
+from ctrace.utils import pct_to_int
+from ctrace.simulation import *
+from ctrace.problem import *
 
 def NoIntervention(state: InfectionState):
     return set()
@@ -101,25 +101,24 @@ def DegGreedy_fair(state: InfectionState):
         quarantine = quarantine.union({i[1] for i in deg[:min(state.budget_labels[label], len(deg))]})
     return quarantine
 
-#Fairness
 def DepRound_fair(state: InfectionState):
     state.set_budget_labels()
     
-    problem2 = MinExposedLP2_label(state)
-    problem2.solve_lp()
-    probabilities = problem2.get_variables()
+    problem = MinExposedLP(state)
+    problem.solve_lp()
+    probabilities = problem.get_variables()
     
     if state.policy == "none":
         rounded = D_prime(np.array(probabilities))
-        return set([problem2.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
+        return set([problem.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
     
     rounded = np.array([0 for i in range(len(probabilities))])
     for label in state.labels:
-        partial_prob = [probabilities[k] if state.G.nodes[problem2.quarantine_map[k]]["age_group"]==label else 0 for k in 
+        partial_prob = [probabilities[k] if state.G.nodes[problem.quarantine_map[k]]["age_group"]==label else 0 for k in 
                         range(len(probabilities))]
         rounded = rounded + D_prime(np.array(partial_prob))
 
-    return set([problem2.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
+    return set([problem.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
 
 '''
 For realistic model conditions where transmission rates are completely unknown.
@@ -128,18 +127,18 @@ The policymaker assumes transmission rates of 1.
 def DepRound_simplified(state: InfectionState):
     state.set_budget_labels()
     
-    problem2 = MinExposedLP2_label(state, simp = True)
-    problem2.solve_lp()
-    probabilities = problem2.get_variables()
+    problem = MinExposedLP(state, simp = True)
+    problem.solve_lp()
+    probabilities = problem.get_variables()
     
     if state.policy == "none":
         rounded = D_prime(np.array(probabilities))
-        return set([problem2.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
+        return set([problem.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
     
     rounded = np.array([0 for i in range(len(probabilities))])
     for label in state.labels:
-        partial_prob = [probabilities[k] if state.G.nodes[problem2.quarantine_map[k]]["age_group"]==label else 0 for k in 
+        partial_prob = [probabilities[k] if state.G.nodes[problem.quarantine_map[k]]["age_group"]==label else 0 for k in 
                         range(len(probabilities))]
         rounded = rounded + D_prime(np.array(partial_prob))
 
-    return set([problem2.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
+    return set([problem.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
