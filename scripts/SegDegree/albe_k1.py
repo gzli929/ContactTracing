@@ -9,7 +9,6 @@ from collections import namedtuple
 json_dir = PROJECT_ROOT / "data" / "SIR_Cache"
 
 G = load_graph_cville_labels()
-G = read_extra_edges(G, 0.15)
 
 config = {
     "G" : [G],
@@ -17,18 +16,19 @@ config = {
     "policy": ["none"],
     "transmission_rate": [0.05],
     "transmission_known": [True],
-    "compliance_rate": [0.8],
+    "compliance_rate": [-1],
     "compliance_known": [True],
-    "snitch_rate": [i/100 for i in range(50, 101, 1)],
-    "from_cache": ["albe_star.json"],
-    "agent": [Random, SegDegree, DegGreedy_fair, DepRound_fair]
+    "snitch_rate": [1],
+    "from_cache": ["albe.json"],
+    "k_1":[i/100 for i in range(1, 51, 1)],
+    "k_2":[0.7]
 }
 
 in_schema = list(config.keys())
 out_schema = ["infection_count", "infections_step"]
 TrackerInfo = namedtuple("TrackerInfo", out_schema)
 
-def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: float, transmission_known: bool, compliance_rate: float, compliance_known:bool, snitch_rate: float, from_cache: str, agent, **kwargs):
+def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: float, transmission_known: bool, compliance_rate: float, compliance_known:bool, snitch_rate: float, from_cache: str, k_1: float, k_2: float, **kwargs):
 
     with open(PROJECT_ROOT / "data" / "SIR_Cache" / from_cache, 'r') as infile:
             j = json.load(infile)
@@ -39,7 +39,7 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
     state = InfectionState(G, (S, I1, I2, R), budget, policy, transmission_rate, transmission_known, compliance_rate, compliance_known, snitch_rate)
     
     while len(state.SIR.I1) + len(state.SIR.I2) != 0:
-        to_quarantine = agent(state)
+        to_quarantine = SegDegree(state, [k_1, 1-k_1], [k_2, 1-k_2])
         state.step(to_quarantine)
         infections.append(len(state.SIR.I2))
     
