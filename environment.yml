@@ -1,4 +1,4 @@
-name: Tracing
+name: tracing
 channels:
     - defaults
     - https://conda.anaconda.org/gurobi
