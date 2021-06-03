@@ -16,7 +16,6 @@ SIR_Tuple = namedtuple("SIR_Tuple", ["S", "I1", "I2", "R"])
                 
 class InfectionState:
     def __init__(self, G:nx.graph, SIR: SIR_Tuple, budget:int, policy:str, transmission_rate:float, transmission_known: bool = False, compliance_rate:float = 1, compliance_known: bool = False, snitch_rate:float = 1):
-    #def __init__(self, G:nx.graph, SIR: SIR_Tuple, budget:int, policy:str, transmission_rate:float, compliance_rate:float = 1, compliance_known: bool = False, partial_compliance:bool = False, I_knowledge:float = 1, discovery_rate:float = 1, snitch_rate:float = 1):
         self.G = G
         self.SIR = SIR_Tuple(*SIR)
         self.budget = budget
@@ -44,6 +43,7 @@ class InfectionState:
         
         #Scale noncompliances such that the weighted average of compliances equals the parameter
         frequencies = list(nx.get_node_attributes(self.G, 'age_group').values())
+        #If the compliance_rate parameter is negative, it defaults to the compliance mapping for the age groups
         if compliance_rate < 0:
             k = 1
         else:
@@ -54,7 +54,7 @@ class InfectionState:
             G.nodes[node]['quarantine'] = 0
             
             new_compliance = 1-k*(1-G.nodes[node]['compliance_rate_og'])
-            #new_compliance = 1-k*(1-G.nodes[node]['compliance_rate'])
+            
             if new_compliance < 0:
                 G.nodes[node]['compliance_rate'] = 0
             elif new_compliance > 1:
@@ -76,38 +76,6 @@ class InfectionState:
         
         # initialize V1 and V2
         self.set_contours()
-        
-    # returns a SimulationState object loaded from a file
-    def load(self, G:nx.graph, file):
-        with open(PROJECT_ROOT / "data" / "SIR_Cache" / file, 'r') as infile:
-            j = json.load(infile)
-            
-            if G.name != j['G']:
-                raise Exception("Graph and SIR not compatible")
-                
-            SIR_real = (j["S"], j["I"], j["R"])
-            
-            return SimulationState(G, SIR_real, j['budget'], j["transmission_rate"], j["compliance_rate"], j['I_knowledge'], j['discovery_rate'], j["snitch_rate"])
-    
-    # saves a SimulationState object to a file
-    def save(self, file):
-        
-        to_save = {
-            "G": self.G.name,
-            "S": self.SIR[0],
-            "I": self.SIR[1],
-            "R": self.SIR[2],
-            "budget": self.budget,
-            "I_knowledge": self.I_knowledge,
-            "transmission_rate": self.transmission_rate,
-            "compliance_rate": self.compliance_rate,
-            "discovery_rate": self.discovery_rate,
-            "snitch_rate": self.snitch_rate
-        }
-        
-        with open(PROJECT_ROOT / "data" / "SIR_Cache" / file, 'w') as outfile:
-            json.dump(to_save, outfile)
-
 
     def step(self, quarantine: Set[int]):
         # moves the SIR forward by 1 timestep
@@ -129,10 +97,7 @@ class InfectionState:
         self.set_contours()
     
     def set_contours(self):
-        #For knowledge of which edges are complied along, add parameter compliance_known:bool
         (self.V1, self.V2, self.P, self.Q) = find_excluded_contours_edges_PQ2(self.G, self.SIR.I2, self.SIR.R, self.transmission_rate, self.snitch_rate, self.transmission_known)
     
     def set_budget_labels(self):
         self.budget_labels = allocate_budget(self.G, self.V1, self.budget, self.labels, self.label_map, self.policy)
-        
-        

@@ -15,7 +15,6 @@ class MinExposedProgram2_label:
     def __init__(self, info: InfectionState, solver_id="GLOP", simp = False):
         
         self.result = None
-        #self.info = info
         self.G = info.G
         self.SIR = info.SIR
         
