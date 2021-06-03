@@ -5,6 +5,6 @@ setup(
     packages=find_packages(),
     version='0.1.0',
     description='Contact tracing Experiments',
-    author='Arash-George-Zach',
+    author='Arash-Ann-George-Zach',
     license='MIT',
 )
