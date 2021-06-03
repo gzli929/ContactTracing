@@ -23,57 +23,49 @@ def Degree(state: InfectionState):
     degrees.sort(reverse=True)
     return {i[1] for i in degrees[:state.budget]}
 
-def SegDegree(state: InfectionState, split_pcts=[0.75, 0.25], alloc_pcts=[.25, .75], carry=True, rng=np.random, DEBUG=False):
+def SegDegree(state: InfectionState, k1=.2, k2=.8, carry=True,rng=np.random, DEBUG=False, extra=False):
     """
-    pcts are ordered from smallest degree to largest degree
-    split_pcts: segment size percentages
-    alloc_pcts: segment budget percentages
-    Overflow Mechanic: the budget may exceed the segment size.
-    We fill from right to left 
-    (greater chance of overflow: larger degree usually have fewer members but higher budget), 
-    and excess capacity is carried over to the next category.
+    k1 - top proportion of nodes classified as "high" degree
+    k2 - proportion of budget assigned to "high" degree nodes
+    carry - whether to assign surplus budget to under-constrained segments
     """
-    if not math.isclose(1, sum(split_pcts)):
-        raise ValueError(
-            f"split_pcts '{split_pcts}' sum to {sum(split_pcts)}, not 1")
-    if not math.isclose(1, sum(alloc_pcts)):
-        raise ValueError(
-            f"alloc_pcts '{alloc_pcts}' sum to {sum(alloc_pcts)}, not 1")
-
     budget = state.budget
     G = state.G
-    split_amt = pct_to_int(len(state.V1), split_pcts)
-    alloc_amt = pct_to_int(budget, alloc_pcts)
-
     v1_degrees = [(n, G.degree(n)) for n in state.V1]
-    v1_sorted = [n for n, d in sorted(v1_degrees, key=lambda x: x[1])]
+    # Large to small
+    v1_sorted = [n for n, d in sorted(v1_degrees, key=lambda x: x[1], reverse=True)]
 
-    v1_segments = np.split(v1_sorted, np.cumsum(split_amt[:-1]))
+    # Rounding transaction
+    top_size = int(k1 * len(v1_sorted))
+    top_budget = int(k2 * budget)
 
-    overflow = 0
+    bottom_size = len(v1_sorted) - top_size
+    bottom_budget = budget - top_budget
+
+    # Size invariant
+    assert (top_size + bottom_size) == len(v1_sorted)
+    assert (top_budget + bottom_budget) == budget
+
+
+    sizes = [top_size, bottom_size]
+    budgets = [top_budget, bottom_budget]
+    budgets = segmented_allocation(sizes, budgets, carry=True)
+
+    # Size constraint
+    assert budgets[0] <= top_size
+    assert budgets[1] <= bottom_size
+
     samples = []
-    for segment, amt in reversed(list(zip(v1_segments, alloc_amt))):
-        # Overflow is carried over to the next segment
-        segment_budget = amt
-        if carry:
-            segment_budget += overflow
+    samples.extend(
+        rng.choice(v1_sorted[:top_size], budgets[0], replace=False).tolist()
+    )
 
-        # Compute overflow
-        if segment_budget > len(segment):
-            overflow = segment_budget - len(segment)
-            segment_budget = len(segment)
-        else:
-            overflow = 0
+    samples.extend(
+        rng.choice(v1_sorted[top_size:], budgets[1], replace=False).tolist()
+    )
 
-        sample = rng.choice(segment, segment_budget, replace=False)
-        samples.extend(sample)
-
-        if DEBUG:
-            print(f"{segment_budget} / {len(segment)} (overflow: {overflow})")
-            print("segment: ", segment)
-            print("sample: ", sample)
-            print("--------------")
-            assert len(samples) <= budget
+    if extra:
+        return {'action': samples}
     return samples
 
 def DegGreedy_fair(state: InfectionState):
