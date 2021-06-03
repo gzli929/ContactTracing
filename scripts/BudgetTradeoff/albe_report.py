@@ -33,8 +33,8 @@ def time_trial_tracker(G: nx.graph, policy:str, transmission_rate: float, transm
             j = json.load(infile)
             (S, I1, I2, R) = (j["S"], j["I1"], j["I2"], j["R"])
             
-    l = 500
-    r = 6000 
+    l = 0
+    r = 20000 
 
     iters = 0
 
