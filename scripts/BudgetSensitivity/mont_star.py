@@ -3,7 +3,6 @@ import networkx as nx
 import pandas as pd
 from ctrace.runner import *
 from ctrace.utils import load_graph_cville_labels, load_graph_montgomery_labels, read_extra_edges
-from ctrace.dataset import load_sir
 from ctrace.simulation import *
 from ctrace.recommender import *
 from collections import namedtuple
@@ -11,33 +10,18 @@ json_dir = PROJECT_ROOT / "data" / "SIR_Cache"
 
 G = load_graph_montgomery_labels()
 G = read_extra_edges(G, 0.15)
-#G.centrality = nx.algorithms.eigenvector_centrality_numpy(G)
-
-#G2 = load_graph_cville_labels()
-#G2 = read_extra_edges(G2, 0.15)
-#G2.centrality = nx.algorithms.eigenvector_centrality_numpy(G2)
-
-#G2 = load_graph_cville_labels()
-#G2.centrality = nx.algorithms.eigenvector_centrality_numpy(G2)
-
-#be5 for cville w/ added edges, ce6 for montgomery w/ added edges
-#b5 for cville, c7 for montgomery
-
-#defaults: snitch = 0.8, discovery = 0.8, compliance = 0.8
-#montgomery budget: 750
-#cville budget: 1350
 
 config = {
     "G" : [G],
-    "budget": [750],
+    "budget": [i for i in range(400, 1260, 10)],
     "policy": ["none"],
     "transmission_rate": [0.05],
     "transmission_known": [True],
-    "compliance_rate": [i/100 for i in range(50, 101, 1)],
+    "compliance_rate": [-1],
     "compliance_known": [True],
     "snitch_rate": [1],
-    "from_cache": ["ce6.json"],
-    "agent": [segmented_greedy]
+    "from_cache": ["mont_star.json"],
+    "agent": [Random, DegGreedy_fair, DepRound_fair, SegDegree]
 }
 
 in_schema = list(config.keys())
