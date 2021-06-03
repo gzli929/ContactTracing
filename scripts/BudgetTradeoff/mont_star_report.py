@@ -2,7 +2,6 @@ import networkx as nx
 import pandas as pd
 from ctrace.runner import *
 from ctrace.utils import *
-from ctrace.dataset import *
 from ctrace.simulation import *
 from ctrace.recommender import *
 from collections import namedtuple

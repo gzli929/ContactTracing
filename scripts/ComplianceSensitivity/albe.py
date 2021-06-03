@@ -3,7 +3,6 @@ import networkx as nx
 import pandas as pd
 from ctrace.runner import *
 from ctrace.utils import load_graph_cville_labels, load_graph_montgomery_labels, read_extra_edges
-from ctrace.dataset import *
 from ctrace.simulation import *
 from ctrace.recommender import *
 from collections import namedtuple

@@ -3,7 +3,6 @@ import networkx as nx
 import pandas as pd
 from ctrace.runner import *
 from ctrace.utils import load_graph_cville_labels, load_graph_montgomery_labels, read_extra_edges
-from ctrace.dataset import *
 from ctrace.simulation import *
 from ctrace.recommender import *
 from collections import namedtuple
@@ -14,15 +13,15 @@ G = read_extra_edges(G, 0.15)
 
 config = {
     "G" : [G],
-    "budget": [i for i in range(400, 1260, 10)],
-    "policy": ["none"],
+    "budget": [750],
+    "policy": ["none", "equal", "old", "adult"],
     "transmission_rate": [0.05],
     "transmission_known": [True],
-    "compliance_rate": [-1],
+    "compliance_rate": [0.8],
     "compliance_known": [True],
     "snitch_rate": [1],
     "from_cache": ["mont_star.json"],
-    "agent": [Random, DegGreedy_fair, DepRound_fair, SegDegree]
+    "agent": [DegGreedy_fair, DepRound_fair]
 }
 
 in_schema = list(config.keys())
@@ -38,7 +37,6 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
             infections = j["infections"]
 
     state = InfectionState(G, (S, I1, I2, R), budget, policy, transmission_rate, transmission_known, compliance_rate, compliance_known, snitch_rate)
-    
     while len(state.SIR.I1) + len(state.SIR.I2) != 0:
         to_quarantine = agent(state)
         state.step(to_quarantine)
@@ -46,7 +44,7 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
     
     return TrackerInfo(len(state.SIR.R), infections)
 
-
-run = GridExecutorParallel.init_multiple(config, in_schema, out_schema, func=time_trial_tracker, trials=10)
+run = GridExecutorParallel.init_multiple(config, in_schema, out_schema, func=time_trial_tracker, trials=50)
 run.exec(max_workers=40)
+
 #%%
