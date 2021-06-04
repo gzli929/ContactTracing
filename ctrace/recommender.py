@@ -8,11 +8,17 @@ from ctrace.utils import pct_to_int
 from ctrace.simulation import *
 from ctrace.problem import *
 
-def NoIntervention(state: InfectionState):
+def NoIntervention(state: InfectionState, extra = False):
+    if extra == True:
+        return {'action': set()}
     return set()
 
-def Random(state: InfectionState):
-    return set(random.sample(state.V1, min(state.budget, len(state.V1))))
+
+def Random(state: InfectionState, extra = False):
+    action = set(random.sample(state.V1, min(state.budget, len(state.V1))))
+    if extra == True:
+        return {'action': action}
+    return action
 
 def Degree(state: InfectionState):
     degrees: List[Tuple[int, int]] = []
@@ -134,3 +140,16 @@ def DepRound_simplified(state: InfectionState):
         rounded = rounded + D_prime(np.array(partial_prob))
 
     return set([problem.quarantine_map[k] for (k,v) in enumerate(rounded) if v==1])
+
+
+
+def Milp(state: InfectionState, extra=False):
+    state.set_budget_labels()
+
+    problem2 = MinExposedIP(state, solver_id="GUROBI")
+    problem2.solve_lp()
+    indicators = problem2.get_variables()
+    
+    if extra:
+        return {'action': set([problem2.quarantine_map[k] for (k, v) in enumerate(indicators) if v == 1]), 'is_optimal': problem2.is_optimal}
+    return set([problem2.quarantine_map[k] for (k, v) in enumerate(indicators) if v == 1])

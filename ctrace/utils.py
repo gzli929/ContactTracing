@@ -407,6 +407,30 @@ class PartitionSIR(Partition):
     def from_json(cls, file_name):
         raise NotImplementedError
 
+def segmented_allocation(sizes, budgets, carry):
+    assert len(budgets) == len(sizes)
+    surplus = 0
+
+    budgets_prior = budgets[:]
+    # Check for budget surpluses
+    for i in range(len(sizes)):
+        if budgets[i] > sizes[i]:
+            surplus += (budgets[i] - sizes[i])
+            budgets[i] = sizes[i]
+    # Allocate excess budget
+    if carry:
+        for i in range(len(sizes)):
+            if (budgets[i] >= sizes[i]):
+                pass
+            elif (sizes[i] - budgets[i]) < surplus: # Surplus not used up
+                surplus -= (sizes[i] - budgets[i])
+                budgets[i] = sizes[i]
+            elif (sizes[i] - budgets[i]) >= surplus: # Surplus used up
+                budgets[i] = budgets[i] + surplus
+                surplus = 0
+    assert sum(budgets_prior) == (sum(budgets) + surplus) # Surplus invariant
+    return budgets
+    
 class PartitionSEIR(Partition):
     type = SEIR
 
@@ -435,3 +459,121 @@ assert pct_to_int(10, [0.5, 0.5]) == [5, 5]
 assert pct_to_int(11, [0.5, 0.5]) == [5, 6]
 assert pct_to_int(20, [0.33, 0.33, 0.34]) == [6, 6, 8]
 
+def calculateExpected(state, quarantine):
+    P, Q = state.P, state.Q
+    total = 0
+    for v in state.V2:
+        expected = 1
+        for u in (set(state.G.neighbors(v)) & state.V1):
+            if u not in quarantine:
+                expected *= (1-P[u]*Q[u][v])
+            else:
+                expected *= (1-(1-state.G.nodes[u]['compliance_rate'])*P[u]*Q[u][v])
+        total += (1-expected)
+    return total
+
+
+def calculateMILP(state, quarantine):
+    P, Q = state.P, state.Q
+    total = 0
+    for v in state.V2:
+        expected = 0
+        for u in (set(state.G.neighbors(v)) & state.V1):
+            if u not in quarantine:
+                expected = max(expected, P[u]*Q[u][v])
+            else:
+                expected = max(expected, (1-state.G.nodes[u]['compliance_rate'])*P[u]*Q[u][v])
+        total += expected
+    return total
+
+
+def calculateD(state):
+    '''
+    Calculates the avg(D_v) and max(D_v) for v in V2
+    '''
+    P, Q = state.P, state.Q
+    D_arr = [len(set(state.G.neighbors(v)) & state.V1) for v in state.V2]
+    if len(D_arr) == 0:
+        return (0, 0)
+    return (max(D_arr), sum(D_arr))
+
+
+def pair_greedy(pairs, label_budgets, budget, mapper):
+    """
+    pairs: (obj_val, id)
+    label_budgets: label -> budget
+    budget: int
+    mapper: id -> label
+    """
+    label_budgets = {k: v for k, v in label_budgets.items() if v is not None}
+
+    result = set()
+    for val, v in pairs:
+        if len(result) >= budget:
+            break
+        label = mapper(v)
+        if label not in label_budgets:
+            result.add(v)
+        else:
+            # Add greedily until budget runs out for a particular label
+            if label_budgets[label] > 0:
+                result.add(v)
+                label_budgets[label] -= 1
+    return result
+
+def rescale_none(pop_counts, policy, budget=None):
+    """
+    Rescales and allows for None in policy proportion factors.
+    Filters out the nones, and performs rescaling on the remaining numbers.
+
+    pop_counts: dict[pop_id] -> count
+    policy: dict[pop_id] -> proportion factor
+    """
+    scales = [v for k, v in policy.items() if v is not None]
+    indices = [k for k, v in policy.items() if v is not None]
+    nulls = [k for k, v in policy.items() if v is None]
+    total = sum(scales)
+    if total == 0:
+        return policy  # 0 -> 0, None -> None
+
+    counts = rescale([pop_counts[i] for i in indices], scales, budget)
+    counts = round_fracs(counts)
+
+    # Expand filtered back into original from
+    soln = {}
+    for k in policy:
+        if k in nulls:
+            soln[k] = None
+        else:
+            soln[k] = counts[indices.index(k)]
+    return soln
+
+def rescale(nums, scales, budget=None):
+    """
+    Rescale nums with scales to budget. Budget defaults to sum(nums)
+
+    Ex:
+    nums = [10, 20]
+    scale = [2, 1]
+    budget = 30
+    will return [15, 15]
+    """
+    raw = np.multiply(nums, scales)
+    if np.sum(raw) == 0:
+        raise ValueError("Rescaling denominator may not 0")
+    if budget is None:
+        budget = np.sum(nums)
+    return list(raw * budget / np.sum(raw))
+
+def round_fracs(amts):
+    """
+    Rounds array, ensuring that sum(result) == sum(amts)
+    Using even-rounding (rounds to the nearest even for 0.5)
+    All fractions are closed (accumulated) to last element.
+    """
+    if len(amts) == 0:
+        return []
+    if len(amts) == 1:
+        return [round(amts[0])]
+    first = [round(amt) for amt in amts[:-1]]
+    return first + [int(sum(amts) - sum(first))]
