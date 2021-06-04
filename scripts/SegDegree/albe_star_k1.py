@@ -21,8 +21,8 @@ config = {
     "compliance_known": [True],
     "snitch_rate": [1],
     "from_cache": ["albe_star.json"],
-    "k_1":[i/100 for i in range(1, 51, 1)],
-    "k_2":[0.7]
+    "k_1":[i/100 for i in range(1, 101, 1)],
+    "k_2":[0.8]
 }
 
 in_schema = list(config.keys())

@@ -20,8 +20,8 @@ config = {
     "compliance_known": [True],
     "snitch_rate": [1],
     "from_cache": ["mont.json"],
-    "k_1":[0.25],
-    "k_2":[i/100 for i in range(50, 101, 1)]
+    "k_1":[0.2],
+    "k_2":[i/100 for i in range(0, 101, 1)]
 }
 
 in_schema = list(config.keys())
