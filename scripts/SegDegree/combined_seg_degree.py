@@ -4,7 +4,7 @@ from ctrace import PROJECT_ROOT
 from ctrace.simulation import InfectionState
 from ctrace.exec.param import GraphParam, SIRParam, FileParam, ParamBase, LambdaParam
 from ctrace.exec.parallel import CsvWorker, MultiExecutor, CsvSchemaWorker
-from ctrace.recommender import binary_segmented_greedy, DepRound_fair, DegGreedy_fair
+from ctrace.recommender import SegDegree
 import json
 import shutil
 import random
@@ -70,7 +70,7 @@ def runner(
 
     raw_history = []
     state = InfectionState(graph, (S, I1, I2, R), budget, policy, transmission_rate,
-                           transmission_known, compliance_rate, compliance_known, discovery_rate, snitch_rate)
+                           transmission_known, compliance_rate, compliance_known, snitch_rate)
 
     while len(state.SIR.I1) + len(state.SIR.I2) != 0:
         to_quarantine = agent(state, **agent_params)
@@ -140,7 +140,7 @@ cville = GraphParam('cville_extra')
 run.add_cartesian({
     "graph": [montgomery],
     "budget": [750],
-    "agent": [LambdaParam(binary_segmented_greedy)],
+    "agent": [LambdaParam(SegDegree)],
     "agent_params": [{'k1': round(p, 3)} for p in np.arange(0, 1.01, 0.01)],
     # "budget": [i for i in range(400, 1260, 50)],
     "policy": ["A"],
@@ -150,14 +150,14 @@ run.add_cartesian({
     "compliance_known": [False],
     "discovery_rate": [1.0],
     "snitch_rate": [1.0],
-    "from_cache": ["ce6.json"],
+    "from_cache": ["mont.json"],
     "trial_id": [i for i in range(5)]
 })
 run.add_cartesian({
     "graph": [cville],
     "budget": [1350],
     # "budget": [i for i in range(720, 2270, 20)],
-    "agent": [LambdaParam(binary_segmented_greedy)],
+    "agent": [LambdaParam(SegDegree)],
     "agent_params": [{'k1': round(p, 3)} for p in np.arange(0, 1.01, 0.01)],
     "policy": ["A"],
     "transmission_rate": [0.05],
@@ -166,14 +166,14 @@ run.add_cartesian({
     "compliance_known": [False],
     "discovery_rate": [1.0],
     "snitch_rate": [1.0],
-    "from_cache": ["be5.json"],
+    "from_cache": ["albe.json"],
     "trial_id": [i for i in range(5)],
 })
 
 run.add_cartesian({
     "graph": [montgomery],
     "budget": [750],
-    "agent": [LambdaParam(binary_segmented_greedy)],
+    "agent": [LambdaParam(SegDegree)],
     "agent_params": [{'k2': round(p, 3)} for p in np.arange(0, 1.01, 0.01)],
     # "budget": [i for i in range(400, 1260, 50)],
     "policy": ["A"],
@@ -183,14 +183,14 @@ run.add_cartesian({
     "compliance_known": [False],
     "discovery_rate": [1.0],
     "snitch_rate": [1.0],
-    "from_cache": ["c7.json"],
+    "from_cache": ["mont_star.json"],
     "trial_id": [i for i in range(5)]
 })
 run.add_cartesian({
     "graph": [cville],
     "budget": [1350],
     # "budget": [i for i in range(720, 2270, 20)],
-    "agent": [LambdaParam(binary_segmented_greedy)],
+    "agent": [LambdaParam(SegDegree)],
     "agent_params": [{'k2': round(p, 3)} for p in np.arange(0, 1.01, 0.01)],
     "policy": ["A"],
     "transmission_rate": [0.05],
@@ -199,7 +199,7 @@ run.add_cartesian({
     "compliance_known": [False],
     "discovery_rate": [1.0],
     "snitch_rate": [1.0],
-    "from_cache": ["b5.json"],
+    "from_cache": ["albe_star.json"],
     "trial_id": [i for i in range(5)],
 })
 

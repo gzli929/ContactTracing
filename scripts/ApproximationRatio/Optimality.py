@@ -98,7 +98,7 @@ def runner(
 
     state = InfectionState(
         graph, (S, I1, I2, R), budget, policy, transmission_rate,
-        transmission_known, compliance_rate, compliance_known, discovery_rate, snitch_rate
+        transmission_known, compliance_rate, compliance_known, snitch_rate
     )
 
     try:
