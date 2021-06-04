@@ -325,6 +325,22 @@ def store_extra_edges(G, alpha):
             duration = durations[random.randint(0, len(durations)-1)]
             outfile.write(str(node) + "," + str(e)+ "," + str(duration) + "\n")
 
+
+def load_graph(name, **args):
+    if name == "montgomery":
+        return load_graph_montgomery_labels()
+    if name == "cville":
+        return load_graph_cville_labels()
+
+    if name == "montgomery_extra":
+        G =  load_graph_montgomery_labels()
+        return read_extra_edges(G, 0.15)
+    if name == "cville_extra":
+        G = load_graph_cville_labels()
+        return read_extra_edges(G, 0.15)
+    raise ValueError(f"{name} is not a recognized graph name.")
+    
+
 SIR = IntEnum("SIR", ["S", "I", "R"])
 SEIR = IntEnum("SEIR", ["S", "E", "I", "R"])
 
