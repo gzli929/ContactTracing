@@ -129,13 +129,12 @@ def grid_world_init(initial_infection=(0.05, 0.1), width=10, small_world=base_gr
     state = InfectionState(
         G=G,
         SIR=(list(seir.S), list(seir.E), list(seir.I), list(seir.R)),
-        budget=10,
+        budget=8,
         policy="A",
-        transmission_rate=0.20,
+        transmission_rate=0.30,
         transmission_known=True,
         compliance_rate=1,
         compliance_known=True,
-        discovery_rate=1,
         snitch_rate=1
     )
     nx.set_node_attributes(G, seir.to_dict(), "seir")
@@ -240,7 +239,7 @@ def draw_frame(num, raw_history=None, action_history=None, ax=None, labels=False
 from functools import partial
 
 # To video
-def draw_anim(raw_history, action_history, out_file=None):
+def draw_anim(raw_history, action_history, fig_title=None):
     fig, ax = plt.subplots(figsize=(10, 10))
     ani = matplotlib.animation.FuncAnimation(
         fig, partial(draw_frame, raw_history=raw_history, action_history=action_history, ax=ax), frames=len(raw_history),
@@ -248,14 +247,14 @@ def draw_anim(raw_history, action_history, out_file=None):
     )
     html_out = ani.to_jshtml()
     plt.close(fig)
-    if out_file is not None:
-        with open(f'figs/{out_file}', "w") as f:
+    if fig_title is not None:
+        with open(f'viz/{fig_title}.png', "w") as f:
             f.write(html_out)
     HTML(html_out)
     return html_out
 
 
-def draw_unrolled(raw_history, action_history, fig_title='SIR Sim', out_file=None):
+def draw_unrolled(raw_history, action_history, fig_title='SIR Model Visualization'):
     fig, axes = plt.subplots(3, 3, figsize=(10, 10))
     fig.suptitle(fig_title, fontsize=16)
     for i, ax in enumerate(axes.flatten()):
@@ -264,8 +263,7 @@ def draw_unrolled(raw_history, action_history, fig_title='SIR Sim', out_file=Non
                    action_history=action_history, ax=ax)
         else:
             ax.set_axis_off()
-    if out_file:
-        fig.savefig(f'figs/{out_file}', dpi=fig.dpi)
+    fig.savefig(f'viz/{fig_title}.png', dpi=fig.dpi)
 
 # %%
 
@@ -273,7 +271,7 @@ def draw_unrolled(raw_history, action_history, fig_title='SIR Sim', out_file=Non
 state = grid_world_init(
     initial_infection=(0, 0.25),
     small_world=base_grid,
-    width=20,
+    width=10,
     seed=42,
 )
 
@@ -290,7 +288,7 @@ state.labels
 #%%
 
 from ctrace.utils import *
-from ctrace.recommender import *
+from ctrace.recommender import SegDegree, Milp, DepRound_fair
 
 #%%
 seg_action = SegDegree(state, k1=0.2, k2=0.8, carry=True,rng=rng, DEBUG=False)
@@ -326,11 +324,19 @@ print(f'Round Value: {round_val}')
 
 #%%
 raw_history, action_history = run(state)
-html_out = draw_anim(raw_history, action_history, 'anim.html')
+html_out = draw_anim(raw_history, action_history, 'anim')
 
 # %%
-draw_unrolled(raw_history, action_history, 'anim.png')
+draw_unrolled(raw_history, action_history, 'DegGreedy on GridWorld Graphs')
 # %%
 
 
-
+state = grid_world_init(
+    initial_infection=(0, 0.25),
+    small_world=feature_grid,
+    width=10,
+    seed=42,
+)
+raw_history, action_history = run(state)
+draw_unrolled(raw_history, action_history, 'DegGreedy on SmallWorld Graphs')
+# %%
