@@ -23,6 +23,44 @@ def Degree(state: InfectionState):
     degrees.sort(reverse=True)
     return {i[1] for i in degrees[:state.budget]}
 
+def Degree_I(state: InfectionState):
+    degrees: List[Tuple[int, int]] = []
+    for u in state.V1:
+        count = sum([1 for v in state.G.neighbors(u) if v in state.SIR.I2])
+        degrees.append((count, u))
+        
+    degrees.sort(reverse=True)
+    return {i[1] for i in degrees[:state.budget]}
+
+def Degree_total(state: InfectionState):
+    degrees: List[Tuple[int, int]] = []
+    for u in state.V1:
+        count = sum([1 for v in state.G.neighbors(u)])
+        degrees.append((count, u))
+        
+    degrees.sort(reverse=True)
+    return {i[1] for i in degrees[:state.budget]}
+
+def List_Length(state: InfectionState):
+    degrees: List[Tuple[int, int]] = []
+    
+    v1_to_score = {}
+    for i in state.SIR.I2:
+        v1_neighbors = [v for v in state.G.neighbors(i) if v in state.V1]
+        
+        for v in v1_neighbors:
+        
+            if v in v1_to_score:
+                v1_to_score[v] += 1/len(v1_neighbors)
+            else:
+                v1_to_score[v] = 1/len(v1_neighbors)
+    
+    degrees = [(value, key) for key, value in v1_to_score.items()]
+    
+    degrees.sort(reverse=True)
+    return {i[1] for i in degrees[:state.budget]}
+
+
 def SegDegree(state: InfectionState, k1=.2, k2=.8, carry=True,rng=np.random, DEBUG=False, extra=False):
     """
     k1 - top proportion of nodes classified as "high" degree
@@ -93,6 +131,27 @@ def DegGreedy_fair(state: InfectionState):
         quarantine = quarantine.union({i[1] for i in deg[:min(state.budget_labels[label], len(deg))]})
     return quarantine
 
+def DegGreedy_private(state: InfectionState):
+    P, Q = state.P, state.Q
+    
+    weights: List[Tuple[int, int]] = []
+    
+    for u in state.V1:
+        deg = len(set(state.G.neighbors(u))&state.V2)
+        w_sum = state.transmission_rate * (deg+random.laplace())
+        weights.append((state.P[u] * (w_sum), u))
+
+    weights.sort(reverse=True)
+    if (state.policy == "none"):
+        return {i[1] for i in weights[:state.budget]}
+    
+    quarantine = set()
+    state.set_budget_labels()
+    for label in state.labels:
+        deg = [tup for tup in weights if state.G.nodes[tup[1]]["age_group"]==label]
+        quarantine = quarantine.union({i[1] for i in deg[:min(state.budget_labels[label], len(deg))]})
+    return quarantine
+    
 def DepRound_fair(state: InfectionState):
     state.set_budget_labels()
     

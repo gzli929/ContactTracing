@@ -48,6 +48,7 @@ class InfectionState:
             k = 1
         else:
             k = max(0, len(G.nodes)*(self.compliance_rate-1)/sum([frequencies.count(i)*(self.compliance_map[i]-1) for i in range(len(self.compliance_map))]))
+        
         self.compliance_map = [(1-k*(1-self.compliance_map[i])) for i in range(len(self.compliance_map))]
         
         for node in G.nodes():
