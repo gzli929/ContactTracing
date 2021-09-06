@@ -1,6 +1,7 @@
 README.md
 setup.py
 ctrace/__init__.py
+ctrace/drawing.py
 ctrace/problem.py
 ctrace/recommender.py
 ctrace/round.py
