@@ -224,21 +224,21 @@ def DegGreedy_private_V2(state: InfectionState):
     weights: List[Tuple[int, int]] = []
     
     for u in state.V1:
-
-        deg_noise_V2 = sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i]!=0]) + sample_dgauss(1/(epsilon/2))
+        
+        deg_noise_V2 = sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i]!=0])
+        infected_nbr_count = len(set(G.neighbors(u)) & set(state.SIR.I2))
+        
+        deg_noise_V2 += sample_dlaplace(1/(math.sqrt(2)*epsilon/2))
+        infected_nbr_count += sample_dlaplace(1/(math.sqrt(2)*epsilon/2))
+        
         w_sum = state.transmission_rate * max(1, deg_noise_V2)
         
-        infected_nbr_count = len(set(G.neighbors(u)) & set(state.SIR.I2))
         probability_infected = 1 - math.pow(1-state.transmission_rate, 
-                                            max(1, infected_nbr_count + sample_dgauss(1/(epsilon/2))))
-        
-        #probability_infected = 1 - math.pow(1-state.transmission_rate, 
-        #                                                max(1, deg_noise))
+                                            max(1, infected_nbr_count))
         
         weights.append((probability_infected * (w_sum), u))
 
     weights.sort(reverse=True)
-    #plt.hist(noises)
     
     return {i[1] for i in weights[:state.budget]}
 
@@ -283,7 +283,7 @@ config = {
     "compliance_known": [True],
     "snitch_rate": [1],
     "from_cache": ["albe_star.json"],
-    "agent": [Degree_V2_noisy, DegGreedy_private_V2]
+    "agent": [DegGreedy_private_V2]
 }
 
 in_schema = list(config.keys())
