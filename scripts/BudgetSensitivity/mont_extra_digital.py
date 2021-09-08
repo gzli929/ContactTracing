@@ -265,8 +265,8 @@ def DegGreedy_private_V2(state: InfectionState):
         deg_noise_V2 = sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i]!=0])
         infected_nbr_count = len(set(G.neighbors(u)) & set(state.SIR.I2))
         
-        deg_noise_V2 += sample_dlaplace(1/(math.sqrt(2)*epsilon/2))
-        infected_nbr_count += sample_dlaplace(1/(math.sqrt(2)*epsilon/2))
+        deg_noise_V2 += sample_dgauss(1/(math.sqrt(2)*epsilon/2))
+        infected_nbr_count += sample_dgauss(1/(math.sqrt(2)*epsilon/2))
         
         w_sum = state.transmission_rate * max(1, deg_noise_V2)
         
