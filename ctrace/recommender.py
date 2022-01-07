@@ -13,6 +13,15 @@ def NoIntervention(state: InfectionState, extra = False):
         return {'action': set()}
     return set()
 
+def EC(state: InfectionState):
+    
+    eigens: List[Tuple[int, int]] = []
+
+    for u in state.V1:
+        eigens.append((state.G.centrality[u], u))
+    
+    eigens.sort(reverse=True)
+    return {i[1] for i in eigens[:state.budget]}
 
 def Random(state: InfectionState, extra = False):
     action = set(random.sample(state.V1, min(state.budget, len(state.V1))))

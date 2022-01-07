@@ -1,0 +1,2 @@
+G,budget,policy,transmission_rate,transmission_known,compliance_rate,compliance_known,snitch_rate,epsilon,from_cache,agent,trial_id,infection_count,infections_step
+montgomery,75,none,0.05,True,0.3608833011792184,True,1,2,mont.json,Degree_V2_noisy,0,41005,"[0, 10, 7, 12, 20, 52, 80, 160, 269, 461, 789, 1238, 2014, 3039, 4116, 5172, 5694, 5286, 4370, 3071, 2038, 1256, 785, 442, 268, 161, 84, 54, 26, 22, 3, 2, 3, 1, 0]"

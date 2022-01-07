@@ -218,13 +218,38 @@ def variance(sigma2):
     assert -1e-15*sigma2 <= original-poisson <= 1e-15*sigma2
     return (original+poisson)/2
 
-def DegGreedy_private_V2(state: InfectionState):
-    epsilon = 1
+'''def DegGreedy_private_V2(state: InfectionState, epsilon: float):
+    weights: List[Tuple[int, int]] = []
     
+    I2 = set(state.SIR.I2)
+    for u in state.V1:
+        
+        deg_noise_V2 = sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i]!=0])
+        infected_nbr_count = len(set(G.neighbors(u)) & I2)
+        
+        #deg_noise_V2 += sample_dgauss(1/(math.sqrt(2)*epsilon/2))
+        deg_noise_V2 += sample_dgauss(1/((1/math.sqrt(10))*epsilon))
+        #1/sqrt(10)
+        #infected_nbr_count += sample_dgauss(1/(math.sqrt(2)*epsilon/2))
+        infected_nbr_count += sample_dgauss(1/((3/math.sqrt(10))*epsilon))
+        #3/sqrt(10)
+        
+        w_sum = state.transmission_rate * max(1, deg_noise_V2)
+        
+        probability_infected = 1 - math.pow(1-state.transmission_rate, 
+                                            max(1, infected_nbr_count))
+        
+        weights.append((probability_infected * (w_sum), u))
+
+    weights.sort(reverse=True)
+    
+    return {i[1] for i in weights[:state.budget]}'''
+
+def DegGreedy_private_V2(state: InfectionState, epsilon: float):
     weights: List[Tuple[int, int]] = []
     
     for u in state.V1:
-        
+
         deg_noise_V2 = sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i]!=0])
         infected_nbr_count = len(set(G.neighbors(u)) & set(state.SIR.I2))
         
@@ -239,58 +264,104 @@ def DegGreedy_private_V2(state: InfectionState):
         weights.append((probability_infected * (w_sum), u))
 
     weights.sort(reverse=True)
+    return {i[1] for i in weights[:state.budget]}
+    
+def DegGreedy_private_product(state: InfectionState, epsilon: float):
+    weights: List[Tuple[int, int]] = []
+    
+    I2 = set(state.SIR.I2)
+    for u in state.V1:
+        ngbrs = set(state.G.neighbors(u))
+        deg_V2 = sum([1 for i in ngbrs if i in state.V2 and state.Q[u][i]!=0])
+        infected_nbr_count = len([v for v in ngbrs if v in I2])
+        
+        noise_delta = max(deg_V2, infected_nbr_count)
+        noise = sample_dgauss(noise_delta/epsilon)
+        
+        weights.append((max(0, noise+deg_V2*infected_nbr_count), u))
+    weights.sort(reverse=True)
     
     return {i[1] for i in weights[:state.budget]}
 
-def Degree_V2_noisy(state: InfectionState):
-    epsilon = 1
+def List_Length_Noisy(state: InfectionState, epsilon: float):
     degrees: List[Tuple[int, int]] = []
     
-    for u in state.V1:
-        noise = sample_dgauss(1/epsilon)
-        count = max(1, sum([1 for i in set(state.G.neighbors(u)) if i in state.V2 and state.Q[u][i] != 0]) + noise)
-        degrees.append((count, u))
+    noise = 0
+    v1_to_score = {}
+    for i in state.SIR.I2:
+        v1_neighbors = [v for v in state.G.neighbors(i) if v in state.V1]
+        ngbr_size = len(v1_neighbors)
+        for v in v1_neighbors:
+            noise = max(noise, 1/ngbr_size)
+            if v in v1_to_score:
+                v1_to_score[v] += 1/ngbr_size
+            else:
+                v1_to_score[v] = 1/ngbr_size
+    
+    degrees = [(value + sample_dgauss(noise/epsilon), key) for key, value in v1_to_score.items()]
     
     degrees.sort(reverse=True)
     return {i[1] for i in degrees[:state.budget]}
 
+def Degree_I_noisy(state: InfectionState, epsilon: float):
+    degrees: List[Tuple[int, int]] = []
+    
+    infected_set = set(state.SIR.I2)
+    
+    for u in state.V1:
+        noise = sample_dgauss(1/epsilon)
+        count = max(1, sum([1 for i in set(state.G.neighbors(u)) if i in infected_set]) + noise)
+        degrees.append((count, u))
+    
+    degrees.sort(reverse=True)
+    return {i[1] for i in degrees[:state.budget]}
+def List_Length(state: InfectionState, epsilon: float):
+    degrees: List[Tuple[int, int]] = []
+    
+    v1_to_score = {}
+    for i in state.SIR.I2:
+        v1_neighbors = [v for v in state.G.neighbors(i) if v in state.V1]
+        
+        for v in v1_neighbors:
+        
+            if v in v1_to_score:
+                v1_to_score[v] += 1/len(v1_neighbors)
+            else:
+                v1_to_score[v] = 1/len(v1_neighbors)
+    
+    degrees = [(value, key) for key, value in v1_to_score.items()]
+    
+    degrees.sort(reverse=True)
+    return {i[1] for i in degrees[:state.budget]}
 
-'''config_ep = {
-    "G" : [G],
-    "budget": [750],
-    "policy": ["none"],
-    "transmission_rate": [0.05],
-    "transmission_known": [True],
-    "compliance_rate": [-1],
-    "compliance_known": [True],
-    "snitch_rate": [1],
-    "from_cache": ["mont.json"],
-    "agent": [Degree_V2_noisy, DegGreedy_private_V2]
-}'''
+def NoIntervention(state: InfectionState, epsilon: float):
+    return set()
 
 state = InfectionState(G, ([], [], [], []), 0, "none", 0, True, -1, True, 0)
 compliances = nx.get_node_attributes(state.G, 'compliance_rate')
-compliance_avg = sum(compliances.values())/(2*len(compliances.values()))
+compliance_avg = 3*sum(compliances.values())/(4*len(compliances.values()))
 print(compliance_avg)
 
 config = {
     "G" : [G],
-    "budget": [i for i in range(math.floor(len(G.nodes)*0.001), math.floor(len(G.nodes)*0.05), int((math.floor(len(G.nodes)*0.05)-math.floor(len(G.nodes)*0.001))/86))],
+    "budget": [i for i in range(math.floor(len(G.nodes)*0.001), math.floor(len(G.nodes)*0.05), int((math.floor(len(G.nodes)*0.05)-math.floor(len(G.nodes)*0.001))/50))],
     "policy": ["none"],
     "transmission_rate": [0.05],
     "transmission_known": [True],
     "compliance_rate": [compliance_avg],
     "compliance_known": [True],
     "snitch_rate": [1],
+    "epsilon": [1],
     "from_cache": ["albe_star.json"],
-    "agent": [DegGreedy_private_V2]
+    "agent": [DegGreedy_private_product, Degree_I_noisy, List_Length_Noisy, NoIntervention]
 }
+
 
 in_schema = list(config.keys())
 out_schema = ["infection_count", "infections_step"]
 TrackerInfo = namedtuple("TrackerInfo", out_schema)
 
-def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: float, transmission_known: bool, compliance_rate: float, compliance_known:bool, snitch_rate: float, from_cache: str, agent, **kwargs):
+def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: float, transmission_known: bool, compliance_rate: float, compliance_known:bool, snitch_rate: float, epsilon: float, from_cache: str, agent, **kwargs):
 
     with open(PROJECT_ROOT / "data" / "SIR_Cache" / from_cache, 'r') as infile:
             j = json.load(infile)
@@ -301,7 +372,7 @@ def time_trial_tracker(G: nx.graph, budget: int, policy:str, transmission_rate: 
     state = InfectionState(G, (S, I1, I2, R), budget, policy, transmission_rate, transmission_known, compliance_rate, compliance_known, snitch_rate)
     
     while len(state.SIR.I1) + len(state.SIR.I2) != 0:
-        to_quarantine = agent(state)
+        to_quarantine = agent(state, epsilon)
         state.step(to_quarantine)
         infections.append(len(state.SIR.I2))
     

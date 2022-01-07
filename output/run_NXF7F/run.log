@@ -1,0 +1,232 @@
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '1'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '3'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '4'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '0'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '0'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '1'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '2'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '3'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '4'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '0'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '1'}
+Finished => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '2'}
+Finished => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '3'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '3'}
+Finished => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'Degree_I_noisy', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'List_Length_Noisy', 'trial_id': '4'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '4'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '1'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '1'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '3'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '0'}
+Launching => {'G': 'cville', 'budget': '2456', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '4'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2684', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2000', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '2'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '3'}
+Launching => {'G': 'cville', 'budget': '2684', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '2'}
+Launching => {'G': 'cville', 'budget': '2684', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '1'}
+Traceback (most recent call last):
+  File "/sfs/qumulo/qhome/al7gc/ContactTracing2/ContactTracing/ctrace/runner.py", line 160, in _runner
+    out = self.func(**param)._asdict()
+  File "albe_extra_digital.py", line 385, in time_trial_tracker
+    to_quarantine = agent(state, epsilon)
+  File "albe_extra_digital.py", line 252, in DegGreedy_private_product
+    infected_nbr_count = len([v for v in ngbrs in I2])
+TypeError: 'bool' object is not iterable
+
+Finished => {'G': 'cville', 'budget': '2684', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'DegGreedy_private_product', 'trial_id': '0'}
+Finished => {'G': 'cville', 'budget': '2228', 'policy': 'none', 'transmission_rate': '0.05', 'transmission_known': 'True', 'compliance_rate': '0.540788417248746', 'compliance_known': 'True', 'snitch_rate': '1', 'epsilon': '1', 'from_cache': 'albe.json', 'agent': 'NoIntervention', 'trial_id': '1'}

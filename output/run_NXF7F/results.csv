@@ -1,0 +1,26 @@
+G,budget,policy,transmission_rate,transmission_known,compliance_rate,compliance_known,snitch_rate,epsilon,from_cache,agent,trial_id,infection_count,infections_step
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,0,None,None
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,1,None,None
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,2,None,None
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,3,None,None
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,4,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,0,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,1,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,2,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,3,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,4,None,None
+cville,2456,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,1,None,None
+cville,2456,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,0,None,None
+cville,2456,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,2,None,None
+cville,2456,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,3,None,None
+cville,2456,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,4,None,None
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,4,75291,"[0, 10, 10, 22, 41, 116, 317, 906, 2489, 4490, 6479, 9498, 11048, 10887, 9505, 7111, 4814, 3156, 1883, 1045, 615, 389, 203, 120, 76, 31, 17, 7, 4, 2, 0]"
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,1,75616,"[0, 10, 10, 22, 41, 116, 317, 940, 2400, 4303, 6063, 9011, 10979, 10898, 9647, 7513, 5109, 3328, 1997, 1223, 696, 424, 224, 148, 76, 56, 29, 23, 8, 3, 2, 0]"
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,0,75223,"[0, 10, 10, 22, 41, 116, 317, 970, 2574, 4548, 6512, 9517, 10940, 10816, 9326, 7106, 4893, 3082, 1818, 1124, 612, 373, 198, 136, 63, 41, 15, 15, 9, 7, 6, 3, 2, 1, 0]"
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,3,75355,"[0, 10, 10, 22, 41, 116, 317, 957, 2529, 4327, 6273, 9246, 11248, 10949, 9580, 7212, 4934, 3047, 1846, 1144, 674, 392, 232, 111, 60, 31, 18, 9, 7, 7, 4, 2, 0]"
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,0,75157,"[0, 10, 10, 22, 41, 116, 317, 948, 2561, 4447, 6583, 9681, 11154, 10669, 9278, 6883, 4866, 3032, 1891, 1105, 652, 408, 219, 129, 61, 44, 16, 10, 2, 1, 1, 0]"
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,2,75267,"[0, 10, 10, 22, 41, 116, 317, 928, 2497, 4290, 6073, 9019, 10835, 10596, 9569, 7343, 5206, 3379, 2047, 1222, 741, 436, 249, 142, 83, 41, 31, 12, 9, 3, 0]"
+cville,2000,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,2,75270,"[0, 10, 10, 22, 41, 116, 317, 948, 2479, 4418, 6267, 9367, 10855, 11050, 9435, 7258, 4789, 3136, 1900, 1166, 666, 400, 249, 147, 84, 59, 33, 19, 8, 6, 8, 3, 3, 1, 0]"
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,3,75350,"[0, 10, 10, 22, 41, 116, 317, 923, 2384, 4146, 5606, 8611, 10735, 10927, 10050, 7702, 5320, 3439, 2143, 1209, 682, 439, 222, 134, 64, 44, 23, 15, 10, 4, 1, 1, 0]"
+cville,2684,none,0.05,True,0.540788417248746,True,1,1,albe.json,DegGreedy_private_product,0,None,None
+cville,2228,none,0.05,True,0.540788417248746,True,1,1,albe.json,NoIntervention,1,75278,"[0, 10, 10, 22, 41, 116, 317, 974, 2542, 4382, 6234, 9255, 10678, 10692, 9373, 7243, 5179, 3354, 2125, 1179, 646, 365, 244, 127, 74, 43, 25, 12, 7, 4, 2, 2, 1, 0]"
